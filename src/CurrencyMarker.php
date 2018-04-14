@@ -29,9 +29,10 @@ class CurrencyMarker {
     protected $link = 'http://cbr.ru/scripts/XML_daily.asp?date_req=';
 
     /**
-     * 
-     * @param string $date
+     *
+     * @param string $date 
      * @param boolean $format - Use to format the exchange rate (true = rounding up, 2 decimal places)
+     * @param string $separator - Separated currency
      */
     public function __construct($date = null, $format = true, $separator = '.') {
 	$this->link = $this->getDate((string) $date);
@@ -45,7 +46,7 @@ class CurrencyMarker {
      * return float | string
      */
     public function __get($charCode) {
-	return (float)$this->curencies[(string) $charCode] ? (float)$this->curencies[(string) $charCode] : 'Курс валюты не найден! Проверьте символьный код!';
+	return (float)$this->curencies[(string) strtoupper($charCode)] ? (float)$this->curencies[(string) strtoupper($charCode)] : 'Курс валюты не найден! Проверьте символьный код!';
     }
 
     /**
