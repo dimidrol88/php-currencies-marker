@@ -1,14 +1,26 @@
 # php-currencies-marker
-A simple, object-oriented class for obtaining exchange rates (сbr.ru)
+Простой php class для получения курсов валют с сайта cbr.ru
+## Старт
 
-Installation
+### Установка через composer
+```
+$ composer require dimidrol88/php-curencies-marker
+```
 
-Install with composer:
-
-composer require dimidrol88/php-curencies-marker
-
-Usage
-
+##Использование
+### Получения котировок на текущий день
+```php
 $valute = new CurrencyMarker();
-echo $valute->USD;
-echo $valute->EUR;
+print_r($valute);
+```
+### Получения котировок на заданный день
+```php
+$valute = new CurrencyMarker(date('d/m/Y'));//10.09.1994
+print_r($valute);
+```
+### Получения котировки по аббревиатуре
+```php
+$valute = new CurrencyMarker(date('d/m/Y'));//10.09.1994
+echo $valute->usd;
+echo $valute->eur;
+```
