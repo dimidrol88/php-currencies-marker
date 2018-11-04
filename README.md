@@ -4,10 +4,10 @@
 
 ### Установка через composer
 ```
-$ composer require dimidrol88/php-curencies-marker
+$ composer require dimidrol88/php-currencies-marker
 ```
 
-##Использование
+## Использование
 ### Получения котировок на текущий день
 ```php
 $valute = new CurrencyMarker();
