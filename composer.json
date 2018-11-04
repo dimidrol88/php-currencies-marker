@@ -1,5 +1,5 @@
 {
-    "name": "dimidrol88/php-currencies-market",
+    "name": "dimidrol88/php-currencies-marker",
     "keywords": ["php", "cbr.ru", "rates", "currencies", "currency","курсы", "валют"],
     "description": "A simple, object-oriented class for obtaining exchange rates (сbr.ru)",
     "type": "library",
