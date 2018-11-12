@@ -21,7 +21,7 @@
     "autoload": {
 	"psr-4": {
 	    "dimidrol88\\сurrenciesMarker\\": "src/",
-	    "dimidrol88\\сurrenciesMarker\\tests": "src/"
+	    "dimidrol88\\сurrenciesMarker\\tests": "tests/"
 	}
     }
 }
