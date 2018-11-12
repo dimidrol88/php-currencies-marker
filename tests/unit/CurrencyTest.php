@@ -1,6 +1,6 @@
 <?php
 
-namespace dimidrol88\сurrenciesMarker\tests;
+namespace dimidrol88\сurrenciesMarker\tests\unit;
 
 use dimidrol88\сurrenciesMarker\CurrencyMarker;
 use PHPUnit\Framework\TestCase;
@@ -18,9 +18,14 @@ class CurrencyTest extends TestCase
 	$this->marker = new CurrencyMarker();
     }
 
-    public function testGetConnection()
+    public function tearDown()
     {
-	$this->assertTrue(true);
+	$this->marker = new CurrencyMarker();
     }
+
+//    public function testGetConnection()
+//    {
+//	$this->assertTrue(true);
+//    }
 
 }
