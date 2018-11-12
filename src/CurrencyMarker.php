@@ -1,6 +1,6 @@
 <?php
 
-namespace dimidrol88\currenciesMarker;
+namespace dimidrol88\phpCurrenciesMarker;
 
 /**
  * 

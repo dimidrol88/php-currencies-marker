@@ -20,12 +20,12 @@
     "minimum-stability": "stable",
     "autoload": {
 	"psr-4": {
-	    "dimidrol88\\сurrenciesMarker\\": "src/"
+	    "dimidrol88\\phpCurrenciesMarker\\": "src/"
 	}
     },
     "autoload-dev": {
 	"psr-4": {
-	    "dimidrol88\\сurrenciesMarker\\tests\\": "tests/"
+	    "dimidrol88\\phpCurrenciesMarker\\tests\\": "tests/"
 	}
     }
 }

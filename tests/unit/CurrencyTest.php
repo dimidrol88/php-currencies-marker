@@ -1,6 +1,6 @@
 <?php
 
-namespace dimidrol88\сurrenciesMarker\tests\unit;
+namespace dimidrol88\phpCurrenciesMarker\tests\unit;
 
 use dimidrol88\сurrenciesMarker\CurrencyMarker;
 use PHPUnit\Framework\TestCase;
