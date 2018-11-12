@@ -1,11 +1,12 @@
 <?php
 
-namespace dimidrol88\phpCurrenciesMarker;
+namespace dimidrol88\currenciesMarker;
 
 /**
  * 
  * Description of CurrencyMarker
  * Simple php class
+ * 
  * @author dimidrol88
  */
 class CurrencyMarker
@@ -14,7 +15,7 @@ class CurrencyMarker
      * 
      * @var array
      */
-    public $curencies = [];
+    public $currencies = [];
 
     /**
      * 
@@ -26,7 +27,13 @@ class CurrencyMarker
      * 
      * @var string
      */
-    protected $link = 'http://cbr.ru/scripts/XML_daily.asp?date_req=';
+    protected $link = "http://cbr.ru/scripts/XML_daily.asp?date_req=";
+
+    /**
+     *
+     * @var array
+     */
+    protected $replace = ['.', ',', '\\', '%', ':'];
 
     /**
      *
@@ -36,46 +43,57 @@ class CurrencyMarker
      */
     public function __construct($date = null, $format = true, $separator = '.')
     {
-	$this->link = $this->getDate((string) $date);
+	$this->link = $this->link . $this->getDate($date);
 	$this->separator = $separator;
-	$this->curencies = $this->setСurrencies($format);
+	$this->upload($format);
     }
 
     /**
      * 
      * return float | string
      */
-    public function __get($charCode)
+    public function __get(string $charCode): string
     {
-	return (float) $this->curencies[(string) strtoupper($charCode)] ? (float) $this->curencies[(string) strtoupper($charCode)] : 'Курс валюты не найден! Проверьте символьный код!';
+	return $this->currencies[strtoupper($charCode)] ? $this->currencies[strtoupper($charCode)] : "Курс валюты {$charCode} не найден! Проверьте символьный код!";
     }
 
     /**
      * 
-     * @param boolean $format
-     * @return array|false
+     * @return array
      */
-    private function setСurrencies($format)
+    public function getCurrenciesList(): array
     {
-	$currencies = simplexml_load_file($this->link);
-	foreach ($currencies->xpath('//Valute') as $currency) {
-	    if (!$format) {
-		$currencies[(string) $currency->CharCode] = (float) str_replace(',', $this->separator, $currency->Value);
-	    } else {
-		$currencies[(string) $currency->CharCode] = round((float) str_replace(',', $this->separator, $currency->Value), 2, PHP_ROUND_HALF_UP);
-	    }
+	$response = [];
+	if ($this->checkConnection()) {
+	    $response = array_keys($this->currencies);
 	}
-	return $currencies ? $currencies : false;
+	return $response;
     }
 
-    /**
-     * 
-     * @param string $date
-     * @return string
-     */
-    private function getDate($date)
+    public function checkConnection(): bool
     {
-	return $date ? $this->link . $date : $this->link . (string) date("d/m/Y");
+	return $this->currencies ? true : false;
+    }
+
+    private function upload(bool $format): void
+    {
+	try {
+	    $currencies = simplexml_load_file($this->link);
+	    foreach ($currencies->xpath('Valute') as $currency) {
+		if (!$format) {
+		    $this->currencies[(string) $currency->CharCode] = (float) str_replace(',', $this->separator, $currency->Value);
+		} else {
+		    $this->currencies[(string) $currency->CharCode] = round((float) str_replace(',', $this->separator, $currency->Value), 2, PHP_ROUND_HALF_UP);
+		}
+	    }
+	} catch (Exception $ex) {
+	    echo 'Произошла ошибка при загрузке: ', $ex->getMessage(), "\n";
+	}
+    }
+
+    private function getDate($date): string
+    {
+	return $date ? (string) str_replace($this->replace, '/', $date) : (string) date("d/m/Y");
     }
 
 }

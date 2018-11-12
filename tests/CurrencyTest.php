@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\unit;
+namespace dimidrol88\сurrenciesMarker\tests;
 
-use dimidrol88\phpCurrenciesMarker\CurrencyMarker;
+use dimidrol88\сurrenciesMarker\CurrencyMarker;
 use PHPUnit\Framework\TestCase;
 
 class CurrencyTest extends TestCase
